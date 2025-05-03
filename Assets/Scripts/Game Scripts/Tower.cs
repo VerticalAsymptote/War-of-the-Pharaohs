@@ -24,8 +24,8 @@ public abstract class Tower : MonoBehaviour{
         return null;
     }
 
-    // Attacks the target enemy
-    private void AttackEnemy(){
+    // Attacks the enemy provided in the parameter
+    private void AttackEnemy(GameObject enemy){
 
     }
 }
@@ -33,7 +33,7 @@ public abstract class Tower : MonoBehaviour{
 // Basic Ground Attack Tower
 public class BasicTower : Tower{
     public BasicTower(){
-        towerPrefab = (GameObject)Resources.Load("Assets/Prefabs/Basic Tower Prefab.prefab");
+        towerPrefab = (GameObject)Resources.Load("Assets/Prefabs/Towers/Basic Tower Prefab.prefab");
         attackDmg = 1;
         attackSpeed = 1;
         attackRange = 5;
