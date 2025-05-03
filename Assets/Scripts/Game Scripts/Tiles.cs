@@ -1,16 +1,14 @@
 using UnityEngine;
 
-public class Tiles : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+public struct Tiles{
+    // Position of the cell relative to its parent
+    public Vector2Int position;
+    // Tile state of the cell
+    public TileState tileState;
+    public Tower tower;
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+// Holds the current tile's state, which would determine the behavior of the cell
+public enum TileState{
+    Empty, Spawn, Destination, Path, Walls, Occupied
 }
