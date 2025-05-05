@@ -7,18 +7,22 @@ public struct Tile{
     public TileState tileState;
     // If not null, then holds the tower data beloning to the tile
     public Tower tower;
+    // Holds the reference to the tile game object
+    public GameObject tileObject;
 
     // Basic contructor for a tile
-    public Tile(Vector2Int pos){
+    public Tile(Vector2Int pos, GameObject obj){
         position = pos;
         tileState = TileState.Empty;
         tower = null;
+        tileObject = obj;
     }
     
-    public Tile(Vector2Int pos, TileState state){
+    public Tile(Vector2Int pos, TileState state, GameObject obj){
         position = pos;
         tileState = state;
         tower = null;
+        tileObject = obj;
     }
 
     // TODO: Opens the shop for the tile to buy towers, if the tower doesn't exist. Else, calls the tower shop GUI 
