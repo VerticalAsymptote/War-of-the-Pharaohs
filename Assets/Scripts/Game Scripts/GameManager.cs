@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour{
             //tiles[PositionToIndex(selectedTile.transform.position)].OpenShopGUI();
             selectedTile = null;
         } else if (selectedTile != null && Input.GetKeyDown(KeyCode.B)){
+            tileManager.PlaceTower(ref tileManager.tiles[TileManager.PositionToIndex(selectedTile.transform.position, size)], new BasicTower());
         }
     }
 

@@ -38,7 +38,7 @@ public abstract class Tower{
 // Basic Ground Attack Tower
 public class BasicTower : Tower{
     public BasicTower(){
-        towerPrefab = (GameObject)Resources.Load("Assets/Prefabs/Towers/Basic Tower Prefab.prefab");
+        towerPrefab = Resources.Load<GameObject>("Towers/Basic Tower Prefab");
         attackDmg = 1;
         attackSpeed = 1;
         attackRange = 5;

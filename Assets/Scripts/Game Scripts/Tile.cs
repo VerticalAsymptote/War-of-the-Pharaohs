@@ -25,10 +25,6 @@ public struct Tile{
     public void OpenShopGUI(){
 
     }
-
-    public void PlaceTower(Tower tower){
-        this.tower = tower;
-    }
 }
 
 // Holds the current tile's state, which would determine the behavior of the cell
