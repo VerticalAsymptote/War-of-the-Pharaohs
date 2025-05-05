@@ -26,20 +26,19 @@ public class GameManager : MonoBehaviour{
             if (tile != null && selectedTile == null){
                 selectedTile = tile;
                 tile.transform.position += new Vector3(0f, 0.5f, 0f);
-                //tiles[PositionToIndex(tile.transform.position)].OpenShopGUI();
             } else if (selectedTile != null && selectedTile == tile){
                 selectedTile = null;
                 tile.transform.position -= new Vector3(0f, 0.5f, 0f);
-                //tiles[PositionToIndex(tile.transform.position)].OpenShopGUI();
             }
         }
         // Alternate method of deselecting tile
         if (selectedTile != null && Input.GetKeyDown(KeyCode.Escape)){
             selectedTile.transform.position -= new Vector3(0f, 0.5f, 0f);
-            //tiles[PositionToIndex(selectedTile.transform.position)].OpenShopGUI();
             selectedTile = null;
         } else if (selectedTile != null && Input.GetKeyDown(KeyCode.B)){
-            tileManager.PlaceTower(ref tileManager.tiles[TileManager.PositionToIndex(selectedTile.transform.position, size)], new BasicTower());
+            tileManager.PlaceTower(ref tileManager.tiles[TileManager.PositionToIndex(selectedTile.transform.localPosition, size)], new BasicTower());
+            selectedTile.transform.position -= new Vector3(0f, 0.5f, 0f);
+            selectedTile = null;
         }
     }
 

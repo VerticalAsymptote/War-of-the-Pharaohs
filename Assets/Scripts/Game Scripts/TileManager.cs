@@ -40,12 +40,10 @@ public class TileManager : MonoBehaviour{
     public void PlaceTower(ref Tile tile, Tower tower){
         if (tile.tower != null)
             return;
-        //Vector3 position = new Vector3(tile.position.x, 0f, tile.position.y);
         GameObject obj = Instantiate(tower.towerPrefab);
         obj.transform.parent = tile.tileObject.transform;
-        obj.transform.position = new Vector3(tile.position.x, 0f, tile.position.y);
+        obj.transform.localPosition = Vector3.zero;
         tile.tower = tower;
-        Debug.Log("Ran");
     }
 
     // Given a tile, removes the tower on that tile
@@ -55,6 +53,6 @@ public class TileManager : MonoBehaviour{
 
     // Following methods convert easily from position information to index of the tiles array
     public static int PositionToIndex(Vector2Int position, int size) => position.y * size + position.x;
-    public static int PositionToIndex(Vector3 position, int size) => (int)position.y * size + (int)position.x;
+    public static int PositionToIndex(Vector3 position, int size) => (int)position.z * size + (int)position.x;
     public static int PositionToIndex(int x, int y, int size) => y * size + x;
 }
