@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // Holds fields for all towers
-public abstract class Tower : MonoBehaviour{
+public abstract class Tower{
     // Asset of the tower to be placed in world
     public GameObject towerPrefab;
     // Holds the attack damage, attack speed, and attack range of the tower
@@ -17,6 +17,11 @@ public abstract class Tower : MonoBehaviour{
 
     void Update(){
         GetClosestEnemy();
+    }
+
+    // Opens the shop for the tower
+    public void OpenShopGUI(){
+
     }
 
     // Gets the closest enemy to the tower that is within its attack range

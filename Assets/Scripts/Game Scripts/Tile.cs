@@ -20,6 +20,15 @@ public struct Tile{
         tileState = state;
         tower = null;
     }
+
+    // TODO: Opens the shop for the tile to buy towers, if the tower doesn't exist. Else, calls the tower shop GUI 
+    public void OpenShopGUI(){
+
+    }
+
+    public void PlaceTower(Tower tower){
+        this.tower = tower;
+    }
 }
 
 // Holds the current tile's state, which would determine the behavior of the cell

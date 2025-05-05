@@ -1,26 +1,21 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(TileManager))]
 [RequireComponent(typeof(Transform))]
 public class GameManager : MonoBehaviour{
 
     [Tooltip("The size of the gameboard")] 
     public int size;
 
-    [SerializeField, Tooltip("Prefab of the tiles")] 
-    public GameObject tilePrefab;
-
-    [SerializeField, Tooltip("Reference to the parent containing the game board")]
-    public Transform board;
+    // Manages the tiles for the map
+    private TileManager tileManager;
     
-    // Holds all the tiles in the game
-    [HideInInspector]
-    public Tile[] tiles;
-    // Holds the currently selected tile
+    // Reference to the currently selected tile
     private GameObject selectedTile;
 
     void Start(){
-        InitializeTiles();
+        tileManager = GetComponent<TileManager>();
+        tileManager.InitializeTiles();
         AdjustCameraLocation();
     }
 
@@ -31,26 +26,19 @@ public class GameManager : MonoBehaviour{
             if (tile != null && selectedTile == null){
                 selectedTile = tile;
                 tile.transform.position += new Vector3(0f, 0.5f, 0f);
+                //tiles[PositionToIndex(tile.transform.position)].OpenShopGUI();
             } else if (selectedTile != null && selectedTile == tile){
                 selectedTile = null;
                 tile.transform.position -= new Vector3(0f, 0.5f, 0f);
+                //tiles[PositionToIndex(tile.transform.position)].OpenShopGUI();
             }
         }
         // Alternate method of deselecting tile
         if (selectedTile != null && Input.GetKeyDown(KeyCode.Escape)){
             selectedTile.transform.position -= new Vector3(0f, 0.5f, 0f);
+            //tiles[PositionToIndex(selectedTile.transform.position)].OpenShopGUI();
             selectedTile = null;
-        }
-    }
-
-    // Initializes the tiles into the world, relative to the game board parent
-    private void InitializeTiles(){
-        tiles = new Tile[size * size];
-        for (int y = 0; y < size; y++){
-            for (int x = 0; x < size; x++){
-                Instantiate(tilePrefab, new Vector3(x, 0f, y), Quaternion.identity, board);
-                tiles[PositionToIndex(x, y)] = new Tile(new Vector2Int(x, y));
-            }
+        } else if (selectedTile != null && Input.GetKeyDown(KeyCode.B)){
         }
     }
 
@@ -70,9 +58,4 @@ public class GameManager : MonoBehaviour{
             return hit.collider.gameObject;
         return null;
     }
-
-    // Both methods convert easily from position information to index of the tiles array
-    private int PositionToIndex(Vector2Int position) => position.y * size + position.x;
-    private int PositionToIndex(Vector3 position) => (int)position.y * size + (int)position.x;
-    private int PositionToIndex(int x, int y) => y * size + x;
 }
