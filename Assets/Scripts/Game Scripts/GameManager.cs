@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour{
     }
 
     void Update(){
-        // Handles getting the gameobject clicked on by mouse, and the visualizatio of selected tile
+        // Handles getting the gameobject clicked on by mouse, and the visualization of selected tile
         if (Input.GetKeyDown(KeyCode.Mouse0)){
             GameObject tile = GetClickedGameObject();
             if (tile != null && selectedTile == null){

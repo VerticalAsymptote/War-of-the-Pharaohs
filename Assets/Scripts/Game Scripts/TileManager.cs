@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(GameManager))]
@@ -7,8 +8,11 @@ public class TileManager : MonoBehaviour{
     [HideInInspector]
     public Tile[] tiles;
 
-    [SerializeField, Tooltip("Prefab of the tiles in the game")]
+    [SerializeField, Tooltip("Prefab of the placeable tiles in the game")]
     private GameObject tilePrefab;
+
+    [SerializeField, Tooltip("Prefab of the path tiles in the game")]
+    private GameObject pathPrefab;
 
     [SerializeField, Tooltip("Reference to the parent containing the game board")]
     private Transform board;
@@ -27,15 +31,24 @@ public class TileManager : MonoBehaviour{
 
         // Places the tiles in the world
         tiles = new Tile[gameManager.size * gameManager.size];
+
         for (int y = 0; y < gameManager.size; y++){
             for (int x = 0; x < gameManager.size; x++){
                 GameObject obj = Instantiate(tilePrefab, new Vector3(x, 0f, y), Quaternion.identity, board);
                 tiles[PositionToIndex(x, y, gameManager.size)] = new Tile(new Vector2Int(x, y), obj);
             }
         }
+
+        // To be fixed later
+        //List<Tile> path = PathGenerator.GeneratePath(tiles[0], tiles[gameManager.size * gameManager.size - 1], ref tiles, gameManager.size);
+        //for (int index = 0; index < path.Count; index++){
+        //    Debug.Log(index);
+        //    Tile tile = tiles[index];
+        //    Destroy(tile.tileObject);
+        //    tile.tileObject = Instantiate(pathPrefab, new Vector3(tile.position.x, 0f, tile.position.y), Quaternion.identity, board);
+        //}
     }
 
-    // TODO: Tower prefab placed in a weird position even if parented
     // Given a tile, places a tower on the tile
     public void PlaceTower(ref Tile tile, Tower tower){
         if (tile.tower != null)

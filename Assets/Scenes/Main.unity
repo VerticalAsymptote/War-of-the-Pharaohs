@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 4771975835483633518, guid: 5dc4c3fb1179851478e75c5fd9dfb3c4, type: 3}
+  pathPrefab: {fileID: 774154983402933824, guid: 1c23cb8960d411b4baee696e28f30ddf, type: 3}
   board: {fileID: 673712780}
 --- !u!1 &1863958404
 GameObject:
