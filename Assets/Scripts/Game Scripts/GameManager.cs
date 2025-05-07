@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour{
             selectedTile.transform.position -= new Vector3(0f, 0.5f, 0f);
             selectedTile = null;
         } else if (selectedTile != null && Input.GetKeyDown(KeyCode.B)){
-            tileManager.PlaceTower(ref tileManager.tiles[TileManager.PositionToIndex(selectedTile.transform.localPosition, size)], new BasicTower());
+            Tile tile = tileManager.tiles[TileManager.PositionToIndex(selectedTile.transform.localPosition, size)];
+            tileManager.PlaceTower(ref tile, new BasicTower(tile));
             selectedTile.transform.position -= new Vector3(0f, 0.5f, 0f);
             selectedTile = null;
         }
