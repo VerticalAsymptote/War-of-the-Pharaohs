@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Transform))]
+[RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour{
     private float speed;
     private float damage;

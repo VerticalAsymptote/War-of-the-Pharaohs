@@ -38,15 +38,7 @@ public class TileManager : MonoBehaviour{
                 tiles[PositionToIndex(x, y, gameManager.size)] = new Tile(new Vector2Int(x, y), obj);
             }
         }
-
-        // To be fixed later
-        //List<Tile> path = PathGenerator.GeneratePath(tiles[0], tiles[gameManager.size * gameManager.size - 1], ref tiles, gameManager.size);
-        //for (int index = 0; index < path.Count; index++){
-        //    Debug.Log(index);
-        //    Tile tile = tiles[index];
-        //    Destroy(tile.tileObject);
-        //    tile.tileObject = Instantiate(pathPrefab, new Vector3(tile.position.x, 0f, tile.position.y), Quaternion.identity, board);
-        //}
+        List<Cell> list = PathGenerator.GeneratePath(new Vector2Int(0, 0), new Vector2Int(0, 7), 8);
     }
 
     // Given a tile, places a tower on the tile
