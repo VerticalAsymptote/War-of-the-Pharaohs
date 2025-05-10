@@ -8,6 +8,12 @@ public class TileManager : MonoBehaviour{
     [HideInInspector]
     public Tile[] tiles;
 
+    [SerializeField, Tooltip("Prefab of the spawn tiles in the game")]
+    private GameObject spawnPrefab;
+
+    [SerializeField, Tooltip("Prefab of the destination tiles in the game")]
+    private GameObject destPrefab;
+
     [SerializeField, Tooltip("Prefab of the placeable tiles in the game")]
     private GameObject tilePrefab;
 
@@ -25,20 +31,36 @@ public class TileManager : MonoBehaviour{
     }
 
     // Initializes the tiles and places them in the world
-    public void InitializeTiles(){
+    public void InitializeTiles(Vector2Int start, Vector2Int end){
         // Populates the reference to gameManager
         gameManager = GetComponent<GameManager>();
 
         // Places the tiles in the world
         tiles = new Tile[gameManager.size * gameManager.size];
+        
+        // Generates a random path from start to end, then instantiates path prefabs
+        List<Cell> pathNodes = PathGenerator.GeneratePath(start, end, gameManager.size);
+        foreach (Cell node in pathNodes){
+            GameObject obj = Instantiate(pathPrefab, new Vector3(node.x, 0f, node.y), Quaternion.identity, board);
+            tiles[PositionToIndex(node.x, node.y, gameManager.size)] = new Tile(new Vector2Int(node.x, node.y), TileState.Path, obj);
+        }
+        GameObject temp = Instantiate(spawnPrefab, new Vector3(start.x, 0f, start.y), Quaternion.identity, board);
+        tiles[PositionToIndex(start, gameManager.size)] = new Tile(start, TileState.Spawn, temp);
+        temp = Instantiate(destPrefab, new Vector3(end.x, 0f, end.y), Quaternion.identity, board);
+        tiles[PositionToIndex(end, gameManager.size)] = new Tile(end, TileState.Destination, temp);
 
+        // Places tiles in the remaining spaces
         for (int y = 0; y < gameManager.size; y++){
             for (int x = 0; x < gameManager.size; x++){
-                GameObject obj = Instantiate(tilePrefab, new Vector3(x, 0f, y), Quaternion.identity, board);
-                tiles[PositionToIndex(x, y, gameManager.size)] = new Tile(new Vector2Int(x, y), obj);
+                if (tiles[PositionToIndex(x, y, gameManager.size)].tileState == TileState.Empty){
+                    GameObject obj = Instantiate(tilePrefab, new Vector3(x, 0f, y), Quaternion.identity, board);
+                    tiles[PositionToIndex(x, y, gameManager.size)] = new Tile(new Vector2Int(x, y), obj);
+                }
             }
         }
-        List<Cell> list = PathGenerator.GeneratePath(new Vector2Int(0, 0), new Vector2Int(0, 7), 8);
+
+        // Adjusts after tile instantiations to allow for camera to be centered
+        board.transform.position += new Vector3(0.5f, 0f, 0.5f);
     }
 
     // Given a tile, places a tower on the tile

@@ -11,7 +11,6 @@ public static class PathGenerator{
     private static Cell startNode, endNode;
     // Size of the grid
     private static int size;
-    private static int[] cellCosts;
 
     // Returns the path for the enemies to travel to
     public static List<Cell> GeneratePath(Vector2Int start, Vector2Int end, int side){
@@ -38,9 +37,10 @@ public static class PathGenerator{
         List<Cell> path = new List<Cell>();
         currentNode = endNode;
         while (currentNode != startNode){
-            path.Add(currentNode);
             currentNode = currentNode.previousCell;
+            path.Add(currentNode);
         }
+        path.Remove(startNode);
         path.Reverse();
         return path;
     }
@@ -49,7 +49,7 @@ public static class PathGenerator{
     private static void PopulateDictionary(){
         for (int y = 0; y < size; y++){
             for (int x = 0; x < size; x++){
-                openList.Add((x, y), new Cell(x, y));
+                openList.Add((x, y), new Cell(x, y, Random.Range(1000.0f, 10000.0f)));
             }
         }    
     }
@@ -85,38 +85,6 @@ public static class PathGenerator{
             openList.Remove((neighbor.x, neighbor.y));
         }
     }
-
-
-    //public static List<Tile> GeneratePath(Tile start, Tile end, ref Tile[] tiles, int size){
-    //    List<Tile> path = new List<Tile>(1000);
-    //    Vector2Int currentPosition = start.position;
-    //    while (currentPosition != end.position){
-    //        path.Add(tiles[TileManager.PositionToIndex(currentPosition, size)]);
-    //        Vector2Int directionVector = Vector2Int.zero;
-    //        int newTileIndex = -1;
-    //        while (newTileIndex > (size * size) && newTileIndex < 0){
-    //            int direction = Random.Range(0, 4);
-    //            switch(direction){
-    //                case 0:
-    //                    directionVector = new Vector2Int(0, 1);
-    //                    break;
-    //                case 1:
-    //                    directionVector = new Vector2Int(1, 0);
-    //                    break;
-    //                case 2:
-    //                    directionVector = new Vector2Int(0, -1);
-    //                    break;
-    //                case 3:
-    //                    directionVector = new Vector2Int(-1, 0);
-    //                    break;
-    //                default: throw new System.Exception("How is this possible");
-    //            }
-    //            newTileIndex = TileManager.PositionToIndex(currentPosition + directionVector, size);
-    //        }
-    //        currentPosition += directionVector;
-    //    }
-    //    return path;
-    //}
 }
 
 public class Cell{
@@ -127,19 +95,15 @@ public class Cell{
     public Cell previousCell;
 
     // Total cost for a cell
-    public float totalCost => distanceToStart + distanceToEnd;
+    public float totalCost => distanceToStart + distanceToEnd + randomCost;
 
     // Holds the distance to start node and end node to calculate the cost
-    public float distanceToStart, distanceToEnd;
+    public float distanceToStart, distanceToEnd, randomCost;
 
-    public Cell(int x, int y){
+    public Cell(int x, int y, float rand = 0){
         this.x = x;
         this.y = y;
-    }
-
-    public Cell(Vector2Int position){
-        x = position.x;
-        y = position.y;
+        randomCost = rand;
     }
 
     // Method to calculate the exact distance from one cell to another

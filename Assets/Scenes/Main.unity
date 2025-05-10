@@ -208,6 +208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2838754cdaf22d44eb0092103482fe18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 3475857802044823002, guid: d924448befdeab844b8741a62c9ea2a8, type: 3}
+  destPrefab: {fileID: 6915585770773516554, guid: b4c4b885900ecfd4182720732517961b, type: 3}
   tilePrefab: {fileID: 4771975835483633518, guid: 5dc4c3fb1179851478e75c5fd9dfb3c4, type: 3}
   pathPrefab: {fileID: 774154983402933824, guid: 1c23cb8960d411b4baee696e28f30ddf, type: 3}
   board: {fileID: 673712780}

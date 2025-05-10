@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour{
 
     void Start(){
         tileManager = GetComponent<TileManager>();
-        tileManager.InitializeTiles();
+        tileManager.InitializeTiles(new Vector2Int(0, 0), new Vector2Int(9, 9));
         AdjustCameraLocation();
     }
 
