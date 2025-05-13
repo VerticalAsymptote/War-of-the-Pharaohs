@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(TileManager))]
+[RequireComponent(typeof(EnemyManager))]
 [RequireComponent(typeof(Transform))]
 public class GameManager : MonoBehaviour{
 
@@ -9,14 +10,20 @@ public class GameManager : MonoBehaviour{
 
     // Manages the tiles for the map
     private TileManager tileManager;
+
+    // Manages the enemies for the game
+    private EnemyManager enemyManager;
     
     // Reference to the currently selected tile
     private GameObject selectedTile;
 
     void Start(){
         tileManager = GetComponent<TileManager>();
+        enemyManager = GetComponent<EnemyManager>();
         tileManager.InitializeTiles(new Vector2Int(0, 0), new Vector2Int(9, 9));
         AdjustCameraLocation();
+
+        enemyManager.CreateEnemy(Vector3.zero, tileManager.pathNodes);
     }
 
     void Update(){

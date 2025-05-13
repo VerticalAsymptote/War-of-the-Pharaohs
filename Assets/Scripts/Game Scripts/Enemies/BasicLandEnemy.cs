@@ -1,5 +1,5 @@
 public class BasicLandEnemy : Enemy{
-    public BasicLandEnemy(){
+    void OnEnable(){
         health = 100;
         speed = 0.5f;
         type = DamageType.Ground;

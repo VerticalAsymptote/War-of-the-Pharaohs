@@ -8,6 +8,9 @@ public class TileManager : MonoBehaviour{
     [HideInInspector]
     public Tile[] tiles;
 
+    [HideInInspector]
+    public List<Cell> pathNodes;
+
     [SerializeField, Tooltip("Prefab of the spawn tiles in the game")]
     private GameObject spawnPrefab;
 
@@ -39,7 +42,7 @@ public class TileManager : MonoBehaviour{
         tiles = new Tile[gameManager.size * gameManager.size];
         
         // Generates a random path from start to end, then instantiates path prefabs
-        List<Cell> pathNodes = PathGenerator.GeneratePath(start, end, gameManager.size);
+        pathNodes = PathGenerator.GeneratePath(start, end, gameManager.size);
         foreach (Cell node in pathNodes){
             GameObject obj = Instantiate(pathPrefab, new Vector3(node.x, 0f, node.y), Quaternion.identity, board);
             tiles[PositionToIndex(node.x, node.y, gameManager.size)] = new Tile(new Vector2Int(node.x, node.y), TileState.Path, obj);
