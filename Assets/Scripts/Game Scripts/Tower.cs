@@ -28,10 +28,11 @@ public abstract class Tower{
             }
         }
         targetEnemy = closestEnemy.GetComponent<Enemy>();
+        Debug.Log(targetEnemy);
     }
 
     // Attacks the enemy provided in the parameter
-    private void AttackEnemy(GameObject enemy){
+    private void AttackEnemy(){
     
     }
 }
