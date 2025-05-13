@@ -11,6 +11,9 @@ public class TileManager : MonoBehaviour{
     [HideInInspector]
     public List<Cell> pathNodes;
 
+    [SerializeField, Tooltip("Reference to the parent containing the game board")]
+    private Transform board;
+
     [SerializeField, Tooltip("Prefab of the spawn tiles in the game")]
     private GameObject spawnPrefab;
 
@@ -23,25 +26,20 @@ public class TileManager : MonoBehaviour{
     [SerializeField, Tooltip("Prefab of the path tiles in the game")]
     private GameObject pathPrefab;
 
-    [SerializeField, Tooltip("Reference to the parent containing the game board")]
-    private Transform board;
-
     // Handles the game logic
     private GameManager gameManager;
 
     void Start(){
+        // Populates the reference to gameManager
         gameManager = GetComponent<GameManager>();
     }
 
     // Initializes the tiles and places them in the world
     public void InitializeTiles(Vector2Int start, Vector2Int end){
-        // Populates the reference to gameManager
-        gameManager = GetComponent<GameManager>();
-
-        // Places the tiles in the world
+        // Initializes tiles array
         tiles = new Tile[gameManager.size * gameManager.size];
         
-        // Generates a random path from start to end, then instantiates path prefabs
+        // Generates a random path from start to end, then instantiates path, spawn, and destination prefabs
         pathNodes = PathGenerator.GeneratePath(start, end, gameManager.size);
         foreach (Cell node in pathNodes){
             GameObject obj = Instantiate(pathPrefab, new Vector3(node.x, 0f, node.y), Quaternion.identity, board);

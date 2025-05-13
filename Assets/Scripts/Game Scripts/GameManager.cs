@@ -1,28 +1,42 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TileManager))]
-[RequireComponent(typeof(EnemyManager))]
 [RequireComponent(typeof(Transform))]
+[RequireComponent(typeof(EnemyManager))]
+[RequireComponent(typeof(TileManager))]
+[RequireComponent(typeof(TowerManager))]
 public class GameManager : MonoBehaviour{
 
     [Tooltip("The size of the gameboard")] 
     public int size;
-
+    
+    // Manages the enemies for the game
+    private EnemyManager enemyManager;
+    
     // Manages the tiles for the map
     private TileManager tileManager;
 
-    // Manages the enemies for the game
-    private EnemyManager enemyManager;
+    // Manages the towers in the game
+    private TowerManager towerManager;
     
     // Reference to the currently selected tile
     private GameObject selectedTile;
 
     void Start(){
-        tileManager = GetComponent<TileManager>();
+        // Start and End positions to generate the random routes from start to end
+        Vector2Int startPos = new Vector2Int(0, 0), endPos = new Vector2Int(9, 9); 
+
+        // Enables the managers for the game
         enemyManager = GetComponent<EnemyManager>();
-        tileManager.InitializeTiles(new Vector2Int(0, 0), new Vector2Int(9, 9));
+        tileManager = GetComponent<TileManager>();
+        towerManager = GetComponent<TowerManager>();
+
+        // Initialize the tiles into the world
+        tileManager.InitializeTiles(startPos, endPos);
+
+        // Adjust Camera Location to better see the map
         AdjustCameraLocation();
 
+        //DEBUG PURPOSES
         enemyManager.CreateEnemy(Vector3.zero, tileManager.pathNodes);
     }
 

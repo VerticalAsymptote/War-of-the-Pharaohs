@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(GameManager))]
 public class EnemyManager : MonoBehaviour{
     [SerializeField]
     private GameObject basicLandEnemy;
