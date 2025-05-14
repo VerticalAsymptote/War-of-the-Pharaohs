@@ -42,6 +42,7 @@ public static class PathGenerator{
         }
         path.Remove(startNode);
         path.Reverse();
+        Debug.Assert(path != null);
         return path;
     }
 

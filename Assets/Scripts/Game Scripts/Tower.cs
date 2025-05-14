@@ -27,8 +27,10 @@ public abstract class Tower{
                 minDistance = distance;
             }
         }
-        targetEnemy = closestEnemy.GetComponent<Enemy>();
-        Debug.Log(targetEnemy);
+        if (targetEnemy != null){
+            targetEnemy = closestEnemy.GetComponent<Enemy>();
+            Debug.Log(targetEnemy);
+        }
     }
 
     // Attacks the enemy provided in the parameter
@@ -44,7 +46,7 @@ public class BasicTower : Tower{
         towerPrefab = Resources.Load<GameObject>("Towers/Basic Tower Prefab");
         attackDmg = 1;
         attackSpeed = 1;
-        attackRange = 5;
+        attackRange = 10;
         type = DamageType.Ground;
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(TowerManager))]
 public class GameManager : MonoBehaviour{
 
-    [Tooltip("The size of the gameboard")] 
+    [SerializeField, Tooltip("The size of the gameboard")] 
     public int size;
     
     // Manages the enemies for the game
@@ -26,12 +26,12 @@ public class GameManager : MonoBehaviour{
         Vector2Int startPos = new Vector2Int(0, 0), endPos = new Vector2Int(9, 9); 
 
         // Enables the managers for the game
-        enemyManager = GetComponent<EnemyManager>();
         tileManager = GetComponent<TileManager>();
+        enemyManager = GetComponent<EnemyManager>();
         towerManager = GetComponent<TowerManager>();
 
         // Initialize the tiles into the world
-        tileManager.InitializeTiles(startPos, endPos);
+        tileManager.InitializeTiles(startPos, endPos, size);
 
         // Adjust Camera Location to better see the map
         AdjustCameraLocation();
@@ -58,10 +58,15 @@ public class GameManager : MonoBehaviour{
             selectedTile = null;
         } else if (selectedTile != null && Input.GetKeyDown(KeyCode.B)){
             Tile tile = tileManager.tiles[TileManager.PositionToIndex(selectedTile.transform.localPosition, size)];
-            tileManager.PlaceTower(ref tile, new BasicTower(tile));
+            CreateTower(ref tile);
             selectedTile.transform.position -= new Vector3(0f, 0.5f, 0f);
             selectedTile = null;
         }
+    }
+
+    private void CreateTower(ref Tile tile){
+        tileManager.PlaceTower(ref tile, new BasicTower(tile));
+        towerManager.towers.Add(tile.tower);
     }
 
     // Centers the Camera relative to the size of the board

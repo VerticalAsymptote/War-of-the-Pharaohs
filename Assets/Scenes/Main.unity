@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 1326820615}
   - component: {fileID: 1326820616}
   - component: {fileID: 1326820617}
+  - component: {fileID: 1326820618}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -209,11 +210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2838754cdaf22d44eb0092103482fe18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  board: {fileID: 673712780}
   spawnPrefab: {fileID: 3475857802044823002, guid: d924448befdeab844b8741a62c9ea2a8, type: 3}
   destPrefab: {fileID: 6915585770773516554, guid: b4c4b885900ecfd4182720732517961b, type: 3}
   tilePrefab: {fileID: 4771975835483633518, guid: 5dc4c3fb1179851478e75c5fd9dfb3c4, type: 3}
   pathPrefab: {fileID: 774154983402933824, guid: 1c23cb8960d411b4baee696e28f30ddf, type: 3}
-  board: {fileID: 673712780}
 --- !u!114 &1326820617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +228,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicLandEnemy: {fileID: 2068058619048337028, guid: 5b62ea3c30faf694d946df0a019433be, type: 3}
+--- !u!114 &1326820618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326820613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4686f30d280284f9f36832a306e431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1863958404
 GameObject:
   m_ObjectHideFlags: 0

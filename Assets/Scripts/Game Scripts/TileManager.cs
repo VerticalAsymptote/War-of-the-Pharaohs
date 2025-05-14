@@ -32,13 +32,13 @@ public class TileManager : MonoBehaviour{
     void Start(){
         // Populates the reference to gameManager
         gameManager = GetComponent<GameManager>();
+    
+        // Initializes tiles array
+        tiles = new Tile[gameManager.size * gameManager.size];
     }
 
     // Initializes the tiles and places them in the world
-    public void InitializeTiles(Vector2Int start, Vector2Int end){
-        // Initializes tiles array
-        tiles = new Tile[gameManager.size * gameManager.size];
-        
+    public void InitializeTiles(Vector2Int start, Vector2Int end, int size){
         // Generates a random path from start to end, then instantiates path, spawn, and destination prefabs
         pathNodes = PathGenerator.GeneratePath(start, end, gameManager.size);
         foreach (Cell node in pathNodes){

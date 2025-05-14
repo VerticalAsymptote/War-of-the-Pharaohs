@@ -8,6 +8,8 @@ public class EnemyManager : MonoBehaviour{
 
     public void CreateEnemy(Vector3 start, List<Cell> path){
         GameObject enemyObj = Instantiate(basicLandEnemy, start, Quaternion.identity);
+        enemyObj.layer = LayerMask.NameToLayer("Enemy");
+        enemyObj.tag = "Enemy";
         enemyObj.AddComponent(typeof(BasicLandEnemy));
         Enemy script = enemyObj.GetComponent<Enemy>();
         script.pathToExit = path;
