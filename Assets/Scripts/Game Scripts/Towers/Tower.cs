@@ -1,11 +1,9 @@
 using UnityEngine;
 
 // Holds fields for all towers
-public abstract class Tower{
+public abstract class Tower : MonoBehaviour{
     // Tile that the tower is on
     public Tile tile;
-    // Asset of the tower to be placed in world
-    public GameObject towerPrefab;
     // Holds the attack damage, attack speed, and attack range of the tower
     public float attackDmg, attackSpeed, attackRange;
     // Determines what type of enemy the tower can attack
@@ -16,8 +14,10 @@ public abstract class Tower{
 
     // Gets the closest enemy to the tower that is within its attack range
     public void GetClosestEnemy(){
-        Vector3 position = new Vector3(tile.position.x, 0f, tile.position.y);
+        Vector3 position = new Vector3(tile.tileObject.transform.position.x, 0f, tile.tileObject.transform.position.y);
+        Debug.Log(position);
         Collider[] enemies = Physics.OverlapSphere(position, attackRange, LayerMask.NameToLayer("Enemy"));
+        Debug.Log(enemies.Length);
         Collider closestEnemy = null;
         float minDistance = float.MaxValue;
         foreach (Collider enemy in enemies){
@@ -36,18 +36,6 @@ public abstract class Tower{
     // Attacks the enemy provided in the parameter
     private void AttackEnemy(){
     
-    }
-}
-
-// Basic Ground Attack Tower
-public class BasicTower : Tower{
-    public BasicTower(Tile tile){
-        this.tile = tile;
-        towerPrefab = Resources.Load<GameObject>("Towers/Basic Tower Prefab");
-        attackDmg = 1;
-        attackSpeed = 1;
-        attackRange = 10;
-        type = DamageType.Ground;
     }
 }
 

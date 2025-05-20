@@ -198,6 +198,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 10
+  enemyManager: {fileID: 0}
+  tileManager: {fileID: 0}
+  towerManager: {fileID: 0}
 --- !u!114 &1326820616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4686f30d280284f9f36832a306e431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towers: []
+  basicTowerPrefab: {fileID: 7734876972583466276, guid: 6120bc3985d7b6a4fb7e586a593c1359, type: 3}
 --- !u!1 &1863958404
 GameObject:
   m_ObjectHideFlags: 0
