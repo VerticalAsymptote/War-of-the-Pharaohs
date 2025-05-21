@@ -9,7 +9,7 @@ public abstract class Enemy : MonoBehaviour{
     // What kind of damage can the enemy take
     public DamageType type;
     // Holds the path that the AI will take to get to the exit.
-    public List<Cell> pathToExit;
+    public LinkedList<Cell> pathToExit;
     private bool isAlive = true;
 
     // Allows the agent to take damage

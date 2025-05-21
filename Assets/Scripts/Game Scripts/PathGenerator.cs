@@ -13,7 +13,7 @@ public static class PathGenerator{
     private static int size;
 
     // Returns the path for the enemies to travel to
-    public static List<Cell> GeneratePath(Vector2Int start, Vector2Int end, int side){
+    public static LinkedList<Cell> GeneratePath(Vector2Int start, Vector2Int end, int side){
         searchQueue = new Queue<Cell>();
         size = side;
         openList = new Dictionary<(int, int), Cell>(size * size);
@@ -34,11 +34,11 @@ public static class PathGenerator{
             } else throw new System.Exception("Error with generating path");
         }
 
-        List<Cell> path = new List<Cell>();
+        LinkedList<Cell> path = new LinkedList<Cell>();
         currentNode = endNode;
         while (currentNode != startNode){
             currentNode = currentNode.previousCell;
-            path.Add(currentNode);
+            path.AddFirst(currentNode);
         }
         path.Remove(startNode);
         path.Reverse();

@@ -9,7 +9,7 @@ public class TileManager : MonoBehaviour{
     public Tile[] tiles;
 
     [HideInInspector]
-    public List<Cell> pathNodes;
+    public LinkedList<Cell> pathNodes;
 
     [SerializeField, Tooltip("Reference to the parent containing the game board")]
     private Transform board;

@@ -6,7 +6,7 @@ public class EnemyManager : MonoBehaviour{
     [SerializeField]
     private GameObject basicLandEnemy;
 
-    public void SpawnEnemy(Vector3 start, List<Cell> path){
+    public void SpawnEnemy(Vector3 start, LinkedList<Cell> path){
         GameObject enemyObj = Instantiate(basicLandEnemy, start, Quaternion.identity);
         enemyObj.layer = LayerMask.NameToLayer("Enemy");
         enemyObj.tag = "Enemy";

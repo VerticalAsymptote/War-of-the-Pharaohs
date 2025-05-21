@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour{
     private float speed;
     private float damage;
     private Vector3 direction;
+    private float lifetime;
     private new Rigidbody rigidbody;
     private new Collider collider;
     
@@ -14,6 +15,7 @@ public class Projectile : MonoBehaviour{
         this.speed = speed;
         this.damage = damage;
         direction = dir;
+        lifetime = 0;
         rigidbody = GetComponent<Rigidbody>();
         collider = GetComponent<Collider>();
 
@@ -24,6 +26,9 @@ public class Projectile : MonoBehaviour{
 
     void Update(){
         transform.Translate(direction * speed * Time.deltaTime);
+        if (lifetime > 5.0f)
+            Destroy(GetComponent<Transform>().gameObject);
+        lifetime += Time.deltaTime;
     }
 
     void OnTriggerEnter(Collider other){        
