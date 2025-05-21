@@ -25,6 +25,7 @@ public class TowerManager : MonoBehaviour{
         tower.transform.localPosition = Vector3.zero;
         tower.AddComponent(typeof(BasicTower));
         tile.tower = tower.GetComponent<Tower>();
+        tile.tower.tile = tile;
         towers.Add(tile.tower);
     }
 

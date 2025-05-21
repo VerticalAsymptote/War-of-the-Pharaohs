@@ -15,19 +15,17 @@ public abstract class Tower : MonoBehaviour{
     // Gets the closest enemy to the tower that is within its attack range
     public void GetClosestEnemy(){
         Vector3 position = new Vector3(tile.tileObject.transform.position.x, 0f, tile.tileObject.transform.position.y);
-        Debug.Log(position);
-        Collider[] enemies = Physics.OverlapSphere(position, attackRange, LayerMask.NameToLayer("Enemy"));
-        Debug.Log(enemies.Length);
+        Collider[] enemies = Physics.OverlapSphere(position, attackRange, ~LayerMask.NameToLayer("Enemy"));
         Collider closestEnemy = null;
         float minDistance = float.MaxValue;
         foreach (Collider enemy in enemies){
             float distance = Vector3.Distance(enemy.transform.position, position);
-            if (distance < minDistance){
+            if (enemy.CompareTag("Enemy") & distance < minDistance){
                 closestEnemy = enemy;
                 minDistance = distance;
             }
         }
-        if (targetEnemy != null){
+        if (targetEnemy == null){
             targetEnemy = closestEnemy.GetComponent<Enemy>();
             Debug.Log(targetEnemy);
         }
