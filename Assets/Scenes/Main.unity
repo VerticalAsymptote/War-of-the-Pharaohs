@@ -245,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towers: []
   basicTowerPrefab: {fileID: 7734876972583466276, guid: 6120bc3985d7b6a4fb7e586a593c1359, type: 3}
+  towerRadiusPrefab: {fileID: 8933463891340536934, guid: ccd886553fa18904687edb9df13b308c, type: 3}
 --- !u!1 &1863958404
 GameObject:
   m_ObjectHideFlags: 0
