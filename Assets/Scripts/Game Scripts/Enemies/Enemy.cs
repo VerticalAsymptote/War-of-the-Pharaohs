@@ -4,16 +4,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(Transform))]
 public abstract class Enemy : MonoBehaviour{
-    // How much health the enemy has and how fast it moves
-    public float health, speed;
+    // How much health the enemy has
+    public int health; 
+    // How fast the enemy moves
+    public float speed;
     // What kind of damage can the enemy take
     public DamageType type;
     // Holds the path that the AI will take to get to the exit.
     public LinkedList<Cell> pathToExit;
+    public bool isAtEnd = false;
     private bool isAlive = true;
 
     // Allows the agent to take damage
-    public void TakeDamage(float damage){
+    public void TakeDamage(int damage){
         health -= damage;
         if (health <= 0){
             StopCoroutine(MoveAIAlongPath());
@@ -38,5 +41,6 @@ public abstract class Enemy : MonoBehaviour{
                 yield return new WaitForEndOfFrame();
             }
         }
+        isAtEnd = true; 
     }
 }

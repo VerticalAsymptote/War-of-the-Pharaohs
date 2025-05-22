@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour{
         tileManager = GetComponent<TileManager>();
         enemyManager = GetComponent<EnemyManager>();
         towerManager = GetComponent<TowerManager>();
+        playerManager = GetComponent<PlayerManager>();
 
         // Initialize the tiles into the world
         tileManager.InitializeTiles(startPos, endPos);

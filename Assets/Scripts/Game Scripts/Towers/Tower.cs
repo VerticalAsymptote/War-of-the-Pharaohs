@@ -6,7 +6,8 @@ public abstract class Tower : MonoBehaviour{
     // Tile that the tower is on
     public Tile tile;
     // Holds the attack damage, attack speed, and attack range of the tower
-    public float attackDmg, attackSpeed, attackRange;
+    public int attackDmg;
+    public float attackSpeed, attackRange;
     // Determines what type of enemy the tower can attack
     public DamageType type;
     // Which enemy is being targetted right now
@@ -24,7 +25,7 @@ public abstract class Tower : MonoBehaviour{
         float minDistance = float.MaxValue;
         foreach (Collider enemy in enemies){
             float distance = Vector3.Distance(enemy.transform.position, position);
-            if (enemy.CompareTag("Enemy") & distance < minDistance){
+            if (enemy.CompareTag("Enemy") && distance < minDistance && (enemy.GetComponent<Enemy>().type == type)){
                 closestEnemy = enemy;
                 minDistance = distance;
             }

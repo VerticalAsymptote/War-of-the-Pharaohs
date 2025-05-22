@@ -77,6 +77,7 @@ public class TileManager : MonoBehaviour{
         tiles[PositionToIndex(start, gameManager.size)] = new Tile(start, TileState.Spawn, temp);
         temp = Instantiate(destPrefab, new Vector3(end.x, 0f, end.y), Quaternion.identity, board);
         tiles[PositionToIndex(end, gameManager.size)] = new Tile(end, TileState.Destination, temp);
+        temp.AddComponent<BaseTile>();
 
         // Places tiles in the remaining spaces
         for (int y = 0; y < gameManager.size; y++)

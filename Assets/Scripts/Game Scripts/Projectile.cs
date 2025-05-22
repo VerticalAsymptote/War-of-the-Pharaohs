@@ -5,13 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Projectile : MonoBehaviour{
     private float speed;
-    private float damage;
+    private int damage;
     private Vector3 direction;
     private float lifetime;
     private new Rigidbody rigidbody;
     private new Collider collider;
     
-    public void FireProjectile(float speed, float damage, Vector3 dir){
+    public void FireProjectile(float speed, int damage, Vector3 dir){
         this.speed = speed;
         this.damage = damage;
         direction = dir;
